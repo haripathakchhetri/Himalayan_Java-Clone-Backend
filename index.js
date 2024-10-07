@@ -4,7 +4,7 @@ import mongoose from "mongoose"
 import userRoutes from "./routes/userRoutes.js"
 import productRoutes from "./routes/productRoutes.js"
 import cors from "cors"
-import fileUpload from 'express-fileupload'
+import fileUpload from "express-fileupload";
 import orderRoutes from './routes/orderRoutes.js'
 import AdminJS from "adminjs"
 import AdminJSExpress from '@adminjs/express'
@@ -15,19 +15,19 @@ import { Order } from "./models/Order.js"
 
 const app = express()
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 dotenv.config({
   path: './.env'
 })
 
+// // File upload middleware
+// app.use(fileUpload({
+//   limits: { fileSize: 1 * 1024 * 1024 }, // 1MB limit
+//   abortOnLimit: true,
+// }));
+
 app.use('/uploads', express.static('uploads'))
-
-app.use(fileUpload({
-  limits: { fileSize: 1 * 1024 * 1024 },
-  abortOnLimit: true
-}))
-
 
 AdminJS.registerAdapter({
   Database,
@@ -47,7 +47,7 @@ const start = async () => {
         options: {
 
           properties: {
-            reviews: { isVisible: false },
+
             createdAt: { isVisible: false },
             updatedAt: { isVisible: false },
           },
