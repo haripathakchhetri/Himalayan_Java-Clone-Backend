@@ -21,7 +21,7 @@ export const getOrderByUser = async (req, res) => {
 
   try {
     if (req.isAdmin) {
-      const orders = await Order.find({})
+      const orders = await Order.find({}).sort('-createdAt')
       return res.status(200).json(orders)
     } else {
       const orders = await Order.find({
@@ -31,5 +31,14 @@ export const getOrderByUser = async (req, res) => {
     }
   } catch (err) {
     return res.status(400).json(`message: ${err}`)
+  }
+}
+
+export const getAllOrdersForAdmin = async (req, res) => {
+  try {
+    const orders = await Order.find({}).populate('userId', 'email').populate({ path: 'products.product', select: 'title' });
+    return res.status(200).json(orders);
+  } catch (err) {
+    return res.status(400).json({ message: err.message });
   }
 }
