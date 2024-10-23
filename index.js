@@ -30,7 +30,7 @@ app.use(fileUpload({
 app.use('/uploads', express.static('uploads'))
 
 
-mongoose.connect(`${process.env.MONGODB_URI}/${process.env.DB_NAME}`).then(() => {
+mongoose.connect('mongodb+srv://hari:hari123@cluster0.uexfwlg.mongodb.net/himalayanJava').then(() => {
   console.log('Database Connected')
 }).catch((err) => {
   console.log(err)
@@ -47,6 +47,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to Himalayan Java")
 })
 
-app.listen(process.env.PORT, () => {
+app.listen(5000, () => {
   console.log(`Listening on port ${process.env.PORT} `)
 })
