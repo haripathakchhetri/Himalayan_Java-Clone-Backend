@@ -1,25 +1,22 @@
 import express from "express"
-import dotenv from "dotenv"
+// import dotenv from "dotenv"
 import mongoose from "mongoose"
 import userRoutes from "./routes/userRoutes.js"
 import productRoutes from "./routes/productRoutes.js"
 import cors from "cors"
 import fileUpload from "express-fileupload";
 import orderRoutes from './routes/orderRoutes.js'
-import AdminJS from "adminjs"
-import AdminJSExpress from '@adminjs/express'
-import { Database, Resource } from '@adminjs/mongoose'
-import { Product } from "./models/Product.model.js"
-import { User } from "./models/User.model.js"
-import { Order } from "./models/Order.js"
+
 
 const app = express()
 app.use(express.json());
-app.use(cors());
+app.use(cors({ origin: '*' }));
 
-dotenv.config({
-  path: './.env'
-})
+// dotenv.config({
+//   path: './.env'
+// })
+
+const PORT = 5000
 
 // File upload middleware
 app.use(fileUpload({
@@ -36,6 +33,11 @@ mongoose.connect('mongodb+srv://hari:hari123@cluster0.uexfwlg.mongodb.net/himala
   console.log(err)
 })
 
+// mongoose.connect(`${process.env.MONGODB_URI}/${process.env.DB_NAME}`).then(() => {
+//   console.log('Database Connected')
+// }).catch((err) => {
+//   console.log(err)
+// })
 
 app.use('/api/users', userRoutes);
 
@@ -47,6 +49,10 @@ app.get("/", (req, res) => {
   res.send("Welcome to Himalayan Java")
 })
 
-app.listen(4000, () => {
-  console.log(`Listening on port ${process.env.PORT} `)
+// app.listen(process.env.PORT, () => {
+//   console.log(`Listening on port ${process.env.PORT} `)
+// })
+
+app.listen(PORT, (e) => {
+  console.log(`Listening on port ${PORT} `)
 })
