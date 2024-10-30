@@ -7,7 +7,6 @@ import cors from "cors"
 import fileUpload from "express-fileupload";
 import orderRoutes from './routes/orderRoutes.js'
 
-
 const app = express()
 app.use(express.json());
 app.use(cors({ origin: '*' }));
@@ -25,7 +24,6 @@ app.use(fileUpload({
 }));
 
 app.use('/uploads', express.static('uploads'))
-
 
 mongoose.connect('mongodb+srv://hari:hari123@cluster0.uexfwlg.mongodb.net/himalayanJava').then(() => {
   console.log('Database Connected')

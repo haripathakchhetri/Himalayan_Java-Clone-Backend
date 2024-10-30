@@ -8,5 +8,4 @@ productRouter.route("/").get(getAllProducts).post(validFile, addProduct);
 
 productRouter.route("/:id").get(getProductById).patch(updateFile, updateProduct).delete(removeProduct)
 
-
 export default productRouter;
